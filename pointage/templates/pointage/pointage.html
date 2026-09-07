@@ -1,0 +1,3 @@
+{% extends 'pointage/base.html' %}
+{% block title %}Accueil | Precensia{% endblock %}
+{% block content %}<h1>Sélectionner un employé</h1><ul>{% for employe in employes %}<li><a href="{% url 'pointage:confirmation_pointage' employe.id %}">{{ employe.prenom }} {{ employe.nom }}</a></li>{% empty %}<li>Aucun employé actif.</li>{% endfor %}</ul>{% endblock %}

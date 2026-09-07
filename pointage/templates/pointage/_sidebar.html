@@ -1,0 +1,11 @@
+<aside class="sidebar">
+    <p class="brand"><span class="brand-mark">✓</span>Precensia</p>
+    <p class="nav-label">Espace admin</p>
+    <nav class="nav">
+        <a class="{% if active == 'dashboard' %}active{% endif %}" href="{% url 'pointage:dashboard' %}"><span class="nav-icon">⌂</span>Accueil</a>
+        <a class="{% if active == 'employes' %}active{% endif %}" href="{% url 'pointage:employes' %}"><span class="nav-icon">♙</span>Employés</a>
+        <a class="{% if active == 'postes' %}active{% endif %}" href="{% url 'pointage:postes' %}"><span class="nav-icon">▣</span>Postes</a>
+        <a class="{% if active == 'horaires' %}active{% endif %}" href="{% url 'pointage:horaires' %}"><span class="nav-icon">◷</span>Horaires</a>
+        <a class="{% if active == 'presences' %}active{% endif %}" href="{% url 'pointage:presences' %}"><span class="nav-icon">▤</span>Présences</a>
+    </nav>
+</aside>

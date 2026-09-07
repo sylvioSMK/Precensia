@@ -1,0 +1,26 @@
+{% extends 'pointage/base.html' %}
+{% block title %}Connexion admin | Precensia{% endblock %}
+{% block content %}
+<div class="auth-page">
+    <div class="auth-decoration auth-decoration-one"></div>
+    <div class="auth-decoration auth-decoration-two"></div>
+    <main class="auth-card">
+        <a class="auth-brand" href="{% url 'pointage:pointage' %}"><span class="brand-mark">✓</span><span>Precensia</span></a>
+        <div class="auth-heading">
+            <span class="auth-icon">↗</span>
+                <p class="auth-kicker">ESPACE ADMIN</p>
+            <h1>Content de vous revoir</h1>
+            <p>Connectez-vous pour gérer votre équipe et vos présences.</p>
+        </div>
+        {% if form.errors %}<div class="auth-error">Identifiant ou mot de passe incorrect.</div>{% endif %}
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            <div class="auth-field"><label for="id_username">Identifiant</label><input id="id_username" name="username" type="text" autocomplete="username" placeholder="Votre identifiant" required autofocus></div>
+            <div class="auth-field"><label for="id_password">Mot de passe</label><input id="id_password" name="password" type="password" autocomplete="current-password" placeholder="Votre mot de passe" required></div>
+            <button class="button auth-submit" type="submit">Se connecter <span>→</span></button>
+        </form>
+        <a class="auth-back" href="{% url 'pointage:pointage' %}">← Retour à l'écran d'accueil</a>
+    </main>
+    <p class="auth-footer">Precensia · Gestion simple des présences</p>
+</div>
+{% endblock %}
