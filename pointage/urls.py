@@ -13,9 +13,12 @@ urlpatterns = [
     path('admin/employes/<int:employe_id>/modifier/', views.modifier_employe, name='employe_modifier'),
     path('admin/postes/', views.postes, name='postes'),
     path('admin/postes/nouveau/', views.nouveau_poste, name='poste_nouveau'),
+    path('admin/postes/<int:poste_id>/modifier/', views.modifier_poste, name='poste_modifier'),
     path('admin/horaires/', views.horaires, name='horaires'),
     path('admin/horaires/nouveau/', views.nouvel_horaire, name='horaire_nouveau'),
-    path('admin/presences/', views.page_simple, {'titre': 'Présences'}, name='presences'),
+    path('admin/horaires/<int:horaire_id>/modifier/', views.modifier_horaire, name='horaire_modifier'),
+    path('admin/presences/', views.presences, name='presences'),
     path('pointage/', views.pointage, name='pointage'),
+    path('pointage/<int:employe_id>/<str:moment>/', views.enregistrer_pointage, name='enregistrer_pointage'),
     path('pointage/<int:employe_id>/', views.confirmation_pointage, name='confirmation_pointage'),
 ]

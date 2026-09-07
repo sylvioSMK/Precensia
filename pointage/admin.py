@@ -20,15 +20,15 @@ class PosteAdmin(admin.ModelAdmin):
 
 @admin.register(Horaire)
 class HoraireAdmin(admin.ModelAdmin):
-	list_display = ('nom', 'type', 'heure_arrivee', 'heure_depart', 'actif')
-	list_filter = ('type', 'actif')
+	list_display = ('nom', 'heure_limite_retard', 'actif')
+	list_filter = ('actif',)
 	search_fields = ('nom',)
 
 
 @admin.register(Employe)
 class EmployeAdmin(admin.ModelAdmin):
-	list_display = ('nom', 'prenom', 'poste', 'horaire', 'actif')
-	list_filter = ('actif', 'poste', 'horaire')
+	list_display = ('nom', 'prenom', 'poste', 'type_journee', 'actif')
+	list_filter = ('actif', 'poste', 'type_journee')
 	search_fields = ('nom', 'prenom', 'email')
 
 

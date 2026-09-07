@@ -23,17 +23,8 @@ class Poste(models.Model):
 
 
 class Horaire(models.Model):
-	class Type(models.TextChoices):
-		NORMAL = 'NORMAL', 'Normal'
-		CONTINU = 'CONTINU', 'Continu'
-
 	nom = models.CharField(max_length=150)
-	type = models.CharField(max_length=10, choices=Type.choices, default=Type.NORMAL)
-	heure_arrivee = models.TimeField()
-	heure_depart_midi = models.TimeField(null=True, blank=True)
-	heure_retour = models.TimeField(null=True, blank=True)
-	heure_depart = models.TimeField()
-	tolerance_retard_minutes = models.PositiveIntegerField(default=0)
+	heure_limite_retard = models.TimeField()
 	actif = models.BooleanField(default=True)
 
 	class Meta:
@@ -44,12 +35,16 @@ class Horaire(models.Model):
 
 
 class Employe(models.Model):
+	class TypeJournee(models.TextChoices):
+		NORMAL = 'NORMAL', 'Journée normale'
+		CONTINU = 'CONTINU', 'Journée continue'
+
 	nom = models.CharField(max_length=150)
 	prenom = models.CharField(max_length=150)
 	email = models.EmailField(blank=True)
 	telephone = models.CharField(max_length=30, blank=True)
 	poste = models.ForeignKey(Poste, on_delete=models.PROTECT, related_name='employes')
-	horaire = models.ForeignKey(Horaire, on_delete=models.PROTECT, related_name='employes')
+	type_journee = models.CharField(max_length=10, choices=TypeJournee.choices, default=TypeJournee.NORMAL)
 	date_embauche = models.DateField()
 	actif = models.BooleanField(default=True)
 	date_creation = models.DateTimeField(auto_now_add=True)

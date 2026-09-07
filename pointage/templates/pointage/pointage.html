@@ -1,3 +1,26 @@
 {% extends 'pointage/base.html' %}
-{% block title %}Accueil | Precensia{% endblock %}
-{% block content %}<h1>Sélectionner un employé</h1><ul>{% for employe in employes %}<li><a href="{% url 'pointage:confirmation_pointage' employe.id %}">{{ employe.prenom }} {{ employe.nom }}</a></li>{% empty %}<li>Aucun employé actif.</li>{% endfor %}</ul>{% endblock %}
+{% block title %}Émargement | Precensia{% endblock %}
+{% block content %}
+<main class="kiosk">
+    <header class="kiosk-header"><a class="auth-brand" href="{% url 'pointage:pointage' %}"><span class="brand-mark">✓</span><span>Precensia</span></a><div><strong>Émargement du jour</strong><span class="kiosk-date">{{ date_du_jour|date:'l d F Y' }}</span></div></header>
+    <section class="kiosk-intro"><div><p class="auth-kicker">PRÉSENCES</p><h1>Bonjour, choisissez votre nom</h1><p class="muted">Cliquez sur le bouton correspondant. L'heure est enregistrée automatiquement.</p></div><a class="admin-link" href="{% url 'pointage:connexion' %}">Accès administration →</a></section>
+    <section class="attendance-list">
+        <div class="attendance-head"><span>Employé</span><span>Type de journée</span><span>Émargement</span></div>
+        {% if employes %}{% for employe in employes %}
+        {% with presence=employe.presence_du_jour %}
+        <article class="attendance-row">
+            <div class="person"><span class="person-avatar">{{ employe.prenom|first }}{{ employe.nom|first }}</span><span><strong>{{ employe.prenom }} {{ employe.nom }}</strong><small>{{ employe.poste }}</small></span></div>
+            <span class="day-badge">{{ employe.get_type_journee_display }}</span>
+            <div class="stamp-actions">
+                <form method="post" action="{% url 'pointage:enregistrer_pointage' employe.id 'arrivee' %}">{% csrf_token %}<button class="stamp {% if presence.heure_arrivee %}done{% endif %}" type="submit" {% if presence.heure_arrivee %}disabled{% endif %}><span>Matin</span>{% if presence.heure_arrivee %}{{ presence.heure_arrivee|time:'H:i' }}{% else %}Émarger{% endif %}</button></form>
+                {% if employe.type_journee == 'CONTINU' %}
+                <form method="post" action="{% url 'pointage:enregistrer_pointage' employe.id 'depart_midi' %}">{% csrf_token %}<button class="stamp {% if presence.heure_depart_midi %}done{% endif %}" type="submit" {% if presence.heure_depart_midi %}disabled{% endif %}><span>Départ midi</span>{% if presence.heure_depart_midi %}{{ presence.heure_depart_midi|time:'H:i' }}{% else %}Émarger{% endif %}</button></form>
+                <form method="post" action="{% url 'pointage:enregistrer_pointage' employe.id 'retour' %}">{% csrf_token %}<button class="stamp {% if presence.heure_retour %}done{% endif %}" type="submit" {% if presence.heure_retour %}disabled{% endif %}><span>Retour midi</span>{% if presence.heure_retour %}{{ presence.heure_retour|time:'H:i' }}{% else %}Émarger{% endif %}</button></form>
+                {% endif %}
+                <form method="post" action="{% url 'pointage:enregistrer_pointage' employe.id 'depart' %}">{% csrf_token %}<button class="stamp {% if presence.heure_depart %}done{% endif %}" type="submit" {% if presence.heure_depart %}disabled{% endif %}><span>Soir</span>{% if presence.heure_depart %}{{ presence.heure_depart|time:'H:i' }}{% else %}Émarger{% endif %}</button></form>
+            </div>
+        </article>
+        {% endwith %}{% endfor %}{% else %}<div class="empty-kiosk">Aucun employé actif n'est disponible pour l'émargement.</div>{% endif %}
+    </section>
+</main>
+{% endblock %}
