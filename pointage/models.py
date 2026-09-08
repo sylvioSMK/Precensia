@@ -45,7 +45,6 @@ class Employe(models.Model):
 	telephone = models.CharField(max_length=30, blank=True)
 	poste = models.ForeignKey(Poste, on_delete=models.PROTECT, related_name='employes')
 	type_journee = models.CharField(max_length=10, choices=TypeJournee.choices, default=TypeJournee.NORMAL)
-	date_embauche = models.DateField()
 	actif = models.BooleanField(default=True)
 	date_creation = models.DateTimeField(auto_now_add=True)
 	date_modification = models.DateTimeField(auto_now=True)

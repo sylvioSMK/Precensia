@@ -8,10 +8,10 @@ class EmployeForm(forms.ModelForm):
         model = Employe
         fields = [
             'nom', 'prenom', 'email', 'telephone', 'poste', 'type_journee',
-            'date_embauche', 'actif',
+            'actif',
         ]
         widgets = {
-            'date_embauche': forms.DateInput(attrs={'type': 'date'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Optionnel'}),
         }
 
 

@@ -157,7 +157,7 @@ def pointage(request):
 	employes = list(Employe.objects.filter(actif=True).select_related('poste'))
 	for employe in employes:
 		employe.presence_du_jour = presences.get(employe.id)
-	return render(request, 'pointage/pointage.html', {
+	return render(request, 'pointage/index.html', {
 		'employes': employes,
 		'date_du_jour': today,
 	})
