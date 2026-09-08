@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: precensia
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input
+    releaseCommand: python manage.py migrate --no-input
+    startCommand: gunicorn Precense.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: 'False'
+      - key: DATABASE_URL
+        fromDatabase:
+          name: precensia-db
+          property: connectionString
+
+databases:
+  - name: precensia-db
+    databaseName: precensia
+    user: precensia
