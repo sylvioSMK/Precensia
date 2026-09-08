@@ -30,12 +30,12 @@ DATABASES = {
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--gsg=sf5h6_l=hm*_otc%=gez(m8-cwi15pq)dlz^u9_3-k(l#'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure--gsg=sf5h6_l=hm*_otc%=gez(m8-cwi15pq)dlz^u9_3-k(l#')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver', '.onrender.com']
 
 
 # Application definition
@@ -83,17 +83,7 @@ WSGI_APPLICATION = 'Precense.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('MYSQL_DATABASE', 'precensia'),
-        'USER': os.getenv('MYSQL_USER', 'root'),
-        'PASSWORD': os.getenv('MYSQL_PASSWORD', ''),
-        'HOST': os.getenv('MYSQL_HOST', '127.0.0.1'),
-        'PORT': os.getenv('MYSQL_PORT', '3306'),
-        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
-    }
-}
+
 
 AUTH_USER_MODEL = 'pointage.Utilisateur'
 LOGIN_URL = '/admin/connexion/'
@@ -135,7 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
