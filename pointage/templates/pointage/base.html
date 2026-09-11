@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="fr">
 <head>
@@ -138,6 +139,7 @@
         @media (max-width:950px) { .sidebar{width:205px;flex-basis:205px}.main{padding:25px}.grid{grid-template-columns:repeat(2,1fr)} }
         @media (max-width:650px) { .shell{display:block}.sidebar{width:100%;padding:18px}.brand{margin-bottom:18px}.nav{display:flex;gap:4px;overflow:auto}.nav-label{display:none}.nav a{white-space:nowrap}.main{padding:20px 15px}.topbar{margin-bottom:16px}.topline{align-items:flex-start;flex-direction:column}.dashboard-columns{grid-template-columns:1fr}.grid{gap:9px}.stat{padding:13px 10px}.number{font-size:20px}.stat-icon{width:34px;height:34px}.form-grid{grid-template-columns:1fr}.welcome{padding:24px 20px}.welcome h1{font-size:23px}.quick-links{grid-template-columns:1fr}.auth-card{padding:29px 22px 24px}.auth-footer{bottom:12px}.kiosk{padding:22px 12px 40px}.kiosk-header{align-items:flex-start;gap:15px;margin-bottom:35px}.kiosk-header>div{display:block;text-align:right}.kiosk-date{display:block;margin-top:4px;font-size:11px}.kiosk-intro{display:block;margin-bottom:20px}.kiosk-intro h1{font-size:24px}.admin-link{display:inline-block;margin-top:17px}.attendance-head{display:none}.attendance-row{display:block;padding:18px}.day-badge{display:inline-block;margin:13px 0}.stamp-actions{display:grid;grid-template-columns:repeat(2,1fr)}.stamp{width:100%;min-width:0}.presence-calendar{display:block}.date-picker{display:grid;grid-template-columns:1fr 1fr;margin-top:18px}.date-picker label{grid-column:1/-1}.date-picker input{width:100%}.date-picker .button{width:100%}.date-nav{margin-top:10px}.date-nav .button{flex:1}.presence-summary{align-items:flex-start;gap:10px;flex-direction:column} }
     </style>
+    <link rel="icon" type="image/png" href="{% static 'pointage/favicon.png' %}">
 </head>
 <body>{% block content %}{% endblock %}</body>
 </html>
