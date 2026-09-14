@@ -7,6 +7,7 @@ app_name = 'pointage'
 urlpatterns = [
     path('', views.accueil, name='accueil'),
     path('admin/connexion/', views.ConnexionAdminView.as_view(), name='connexion'),
+    path('admin/deconnexion/', views.deconnexion, name='deconnexion'),
     path('admin/dashboard/', views.dashboard, name='dashboard'),
     path('admin/employes/', views.employes, name='employes'),
     path('admin/employes/nouveau/', views.nouvel_employe, name='employe_nouveau'),

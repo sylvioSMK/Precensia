@@ -6,6 +6,7 @@ from django.contrib.auth.views import LoginView
 from django.db.models import Case, IntegerField, When
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.contrib.auth import logout
 
 from .forms import EmployeForm, HoraireForm, PosteForm
 from .models import Employe, Horaire, Poste, Presence
@@ -17,6 +18,9 @@ admin_required = user_passes_test(lambda user: user.is_authenticated and user.is
 def accueil(request):
 	return redirect('pointage:pointage')
 
+def deconnexion(request):
+    logout(request)
+    return redirect('pointage:connexion')
 
 class ConnexionAdminView(LoginView):
 	template_name = 'pointage/connexion.html'
