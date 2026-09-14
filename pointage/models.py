@@ -36,7 +36,7 @@ class Horaire(models.Model):
 
 class Employe(models.Model):
 	class TypeJournee(models.TextChoices):
-		NORMAL = 'NORMAL', 'Journée normale'
+	#	NORMAL = 'NORMAL', 'Journée normale'
 		CONTINU = 'CONTINU', 'Journée continue'
 
 	nom = models.CharField(max_length=150)
@@ -44,7 +44,7 @@ class Employe(models.Model):
 	email = models.EmailField(blank=True)
 	telephone = models.CharField(max_length=30, blank=True)
 	poste = models.ForeignKey(Poste, on_delete=models.PROTECT, related_name='employes')
-	type_journee = models.CharField(max_length=10, choices=TypeJournee.choices, default=TypeJournee.NORMAL)
+	type_journee = models.CharField(max_length=10, choices=TypeJournee.choices, default=TypeJournee.CONTINU)
 	actif = models.BooleanField(default=True)
 	date_creation = models.DateTimeField(auto_now_add=True)
 	date_modification = models.DateTimeField(auto_now=True)
